@@ -1,8 +1,11 @@
+import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { AuthForm } from "@/components/forms/auth-form";
 import { getOptionalUser } from "@/lib/supabase/auth";
 
-export const dynamic = "force-dynamic";
+const AuthForm = dynamic(
+  () => import("@/components/forms/auth-form").then((m) => m.AuthForm),
+  { ssr: false }
+);
 
 export default async function LoginPage() {
   const user = await getOptionalUser();
