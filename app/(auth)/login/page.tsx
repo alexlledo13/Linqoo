@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/forms/auth-form";
 import { getOptionalUser } from "@/lib/supabase/auth";
@@ -9,5 +10,9 @@ export default async function LoginPage() {
     redirect("/dashboard");
   }
 
-  return <AuthForm mode="login" />;
+  return (
+    <Suspense>
+      <AuthForm mode="login" />
+    </Suspense>
+  );
 }
